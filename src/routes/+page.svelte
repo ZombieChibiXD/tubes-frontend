@@ -7,9 +7,6 @@
 </svelte:head>
 
 <section>
-	<a href="/">Home</a>
-	<a href="/login">Login</a>
-	<a href="/about">About</a>
 	<h1>
 		Welcome to Tubesoft
 	</h1>

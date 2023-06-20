@@ -5,8 +5,10 @@
 
 
 <script>
-	import { user, authenticated, authenticating, loading, token } from "$lib/stores/store";
+	import { user, authenticated, authenticating, token } from "$lib/stores/store";
 	console.log($authenticated);
+
+	
 </script>
 
 <div class="text-column">
@@ -15,8 +17,6 @@
 		<p>You are authenticated!</p>
 	{:else if $authenticating}
 		<p>Authenticating...</p>
-	{:else if $loading}
-		<p>Loading...</p>
 	{:else}
 		<p>You are not authenticated!</p>
 	{/if}
