@@ -12,7 +12,7 @@
         {#if $authenticated}
             <li><a href="/new_project">New Project</a></li>
             <li><a href="/ongoing_project">Ongoing Project</a></li>
-            <li><a href="/ongoing_project">Tool History</a></li>
+            <li><a href="/tool_history">Tool History</a></li>
     
             <!-- {#if $token?.accessToken.abilities.includes('ADMINISTRATOR')}
             <li>
