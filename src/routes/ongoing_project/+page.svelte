@@ -190,8 +190,12 @@
 	$: {
 		if (machining_time || product_quantity) {
 			remaining_tool_life = undefined;
+			errors.machining_time = [];
+			errors.product_quantity = [];
+			errors.remaining_tool_life = [];
 		}
 	}
+
 	const calculate_tool_life = () => {
 		if (!form.reportValidity()) return;
 
@@ -291,6 +295,7 @@
 					<select
 						bind:value={tool_product_id}
 						id="tool_product_id"
+						on:change={() => (tool_item_id = '')}
 						required
 					>
 						<option value="">
@@ -423,7 +428,7 @@
 						bind:value={machining_project.cutting_speed}
 						min={selected_tool_product?.min_cutting_speed}
 						max={selected_tool_product?.max_cutting_speed}
-						readonly
+						disabled
 					/>
 					<input
 						type="number"
@@ -432,7 +437,6 @@
 						min={selected_tool_product?.min_cutting_speed}
 						max={selected_tool_product?.max_cutting_speed}
 						bind:value={machining_project.cutting_speed}
-						
 						readonly
 					/>
 					<FormError {errors} field="cutting_speed" />
