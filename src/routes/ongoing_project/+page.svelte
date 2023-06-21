@@ -273,7 +273,7 @@
 	<form on:submit|preventDefault={handleSubmit} id="form" bind:this={form}>
 		<fieldset>
 			<legend>
-				<h3>Tool & Workpiece Material</h3>
+				Tool & Workpiece Material
 			</legend>
 			<section class="grid">
 				<label for="tool_material_id">Tool Material</label>
@@ -360,7 +360,7 @@
 		</fieldset>
 		<fieldset>
 			<legend>
-				<h3>Product Specifications</h3>
+				Product Specifications
 			</legend>
 			<section class="grid">
 				<label for="product_id">Product Id</label>
@@ -413,7 +413,7 @@
 		</fieldset>
 		<fieldset>
 			<legend>
-				<h3>Machining Operations</h3>
+				Machining Operations
 			</legend>
 			<section class="grid">
 				<label for="machining_process">Machining Process</label>
@@ -511,7 +511,7 @@
 		</fieldset>
 		<fieldset>
 			<legend>
-				<h3>Tool Conditions</h3>
+				Tool Conditions
 			</legend>
 			<section class="grid">
 				<label for="early_tool_life">Early tool life</label>
@@ -541,6 +541,31 @@
 				</div>
 			</section>
 		</fieldset>
-		<button>Start &amp; Save</button>
+		<button class="submit_button">Start &amp; Save</button>
 	</form>
 </section>
+
+<style>
+	fieldset {
+		box-shadow: 10px 10px 4px 0 rgba(0, 0, 0, 0.2);
+		border-radius: .5rem;
+		border: 1px solid #ccc;
+		padding: 1rem 0rem;
+	}
+	fieldset > legend {
+		padding: 0.5rem;
+		color: #ccc;
+		background-color: rgb(11, 49, 153);
+		width: 100%;
+		font-size: xx-large;
+		border: 1px solid #d8d8d8;
+	}
+	fieldset > section {
+		padding: 0.5rem 2rem;
+	}
+	.submit_button {
+		margin: 2rem auto;
+		width: 50%;
+		
+	}
+</style>

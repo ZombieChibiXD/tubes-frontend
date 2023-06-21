@@ -6,7 +6,7 @@
 	<meta name="description" content="Main page" />
 </svelte:head>
 
-<section>
+<section class="container">
 	<h1>
 		Welcome to Tubesoft
 	</h1>

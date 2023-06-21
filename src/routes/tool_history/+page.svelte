@@ -289,7 +289,7 @@
 	<form on:submit|preventDefault={handleSubmit}>
 		<fieldset>
 			<legend>
-				<h3>Tool & Workpiece Material</h3>
+				Tool & Workpiece Material
 			</legend>
 			<section class="grid">
 				<label for="tool_material_id">Tool Material</label>
@@ -360,6 +360,31 @@
 				</div>
 			</section>
 		</fieldset>
-		<button>Download Tool History</button>
+		<button class="submit_button">Download Tool History</button>
 	</form>
 </section>
+
+<style>
+	fieldset {
+		box-shadow: 10px 10px 4px 0 rgba(0, 0, 0, 0.2);
+		border-radius: .5rem;
+		border: 1px solid #ccc;
+		padding: 1rem 0rem;
+	}
+	fieldset > legend {
+		padding: 0.5rem;
+		color: #ccc;
+		background-color: rgb(11, 49, 153);
+		width: 100%;
+		font-size: xx-large;
+		border: 1px solid #d8d8d8;
+	}
+	fieldset > section {
+		padding: 0.5rem 2rem;
+	}
+	.submit_button {
+		margin: 2rem auto;
+		width: 50%;
+		
+	}
+</style>

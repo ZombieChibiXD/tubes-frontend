@@ -78,29 +78,33 @@
 
 
 <section class="container">
-	<form on:submit|preventDefault={handleSubmit}>
-		<div>
-			<label for="username">Username</label>
-			<input type="text" id="username" bind:value={username} class:form-error={errors?.username}/>
-			{#if errors?.username}
-			<ul style="font-size: small; color: red;">
-				{#each errors.username as error}
-					<li>{error}</li>
-				{/each}
-			</ul>
-			{/if}
+	<article class="grid">
+		<div style="background-color: navy; border-radius: .4rem;">
 		</div>
-		<div>
-			<label for="password">Password</label>
-			<input type="password" id="password" bind:value={password} class:form-error={errors?.password}/>
-			{#if errors?.password}
-			<ul style="font-size: small; color: red;">
-				{#each errors.password as error}
-					<li>{error}</li>
-				{/each}
-			</ul>
-			{/if}
-		</div>
-		<button type="submit">Login</button>
-	</form>
+		<form on:submit|preventDefault={handleSubmit} style="padding: 1rem 2rem;">
+			<div>
+				<label for="username">Username</label>
+				<input type="text" id="username" bind:value={username} class:form-error={errors?.username}/>
+				{#if errors?.username}
+				<ul style="font-size: small; color: red;">
+					{#each errors.username as error}
+						<li>{error}</li>
+					{/each}
+				</ul>
+				{/if}
+			</div>
+			<div>
+				<label for="password">Password</label>
+				<input type="password" id="password" bind:value={password} class:form-error={errors?.password}/>
+				{#if errors?.password}
+				<ul style="font-size: small; color: red;">
+					{#each errors.password as error}
+						<li>{error}</li>
+					{/each}
+				</ul>
+				{/if}
+			</div>
+			<button type="submit">Login</button>
+		</form>
+	</article>
 </section>
