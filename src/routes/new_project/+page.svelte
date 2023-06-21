@@ -60,14 +60,17 @@
 	console.log('New Project Page');
 	/**
 	 * @typedef {{
-	 *   materials: import('$lib/types/global').ToolMaterial[];
-	 *   projects: import('$lib/types/global').MachiningProject[];
-	 *   machining: {
 	 *     workpiece_materials: string[];
 	 *     machining_processes: string[];
 	 *     c: number;
 	 *     n: number;
-	 *   };
+	 * }} MachiningData
+	 */
+	/**
+	 * @typedef {{
+	 *   materials: import('$lib/types/global').ToolMaterial[];
+	 *   projects: import('$lib/types/global').MachiningProject[];
+	 *   machining: MachiningData;
 	 * }} ProjectData
 	 */
 	//** @type {ProjectData} */
@@ -81,8 +84,17 @@
 			n: MachiningN
 		}
 	};
-	let { materials, projects, machining } = data;
-
+	/** @type {import('$lib/types/global').ToolMaterial[]} */
+	let materials = [];
+	/** @type {import('$lib/types/global').MachiningProject[]} */
+	let projects = [];
+	/** @type {MachiningData} */
+	let machining = {
+		workpiece_materials: [],
+		machining_processes: [],
+		c: 0,
+		n: 0
+	};
 	const sync_data = (/** @type {ProjectData} */ data) => {
 		console.warn('sync_data', data);
 		materials = data.materials;
