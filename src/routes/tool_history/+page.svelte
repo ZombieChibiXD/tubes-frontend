@@ -92,7 +92,6 @@
 
 	$: sync_data(data);
 
-
 	/**
 	 * @type {import('$lib/types/global').ToolMaterial | undefined}
 	 */
@@ -135,9 +134,136 @@
 		});
 
 		if (result.status === 200) {
+			/**
+			 * @type {import('$lib/types/global').MachiningProjectExtended[]}
+			 */
+			const machining_projects = await result.json();
+			if (machining_projects.length === 0) {
+				toast.push('No Tool History found', {
+					classes: ['warning']
+				});
+				return;
+			}
+			/**
+			 *
+			 * @typedef {{
+			 *   	Time: any;
+			 *   	['Tool Material']: any;
+			 *   	['Tool ID']: any;
+			 *   	['Tool Number']: any;
+			 *   	['Workpiece Material']: any;
+			 *   	['Product ID']: any;
+			 *   	['Initial Diameter (mm)']: any;
+			 *   	['Final Diameter (mm)']: any;
+			 *   	['Workpart Length (mm)']: any;
+			 *   	['Machining Process']: any;
+			 *   	['Cutting Speed (m/min)']: any;
+			 *   	['Depth of Cut (mm)']: any;
+			 *   	['Feeding (mm/rev)']: any;
+			 *   	['Machining Time (min)']: any;
+			 *   	['Product Quantity (pcs)']: any;
+			 *   	['Early Tool Life (min)']: any;
+			 *   	['Remaining Tool Life (min)']: any;
+			 * }} ToolHistory
+			 */
+			/**
+			 * @type {ToolHistory[]}
+			 */
+			let tool_histories = [];
+			machining_projects.forEach((project) => {
+				const {
+					workpiece_material,
+					cutting_speed,
+					depth_of_cut,
+					early_tool_life,
+					feeding,
+					machining_process,
+					created_at,
+					tool_material: { name: tool_material },
+					tool_product: { code: product_code },
+					tool_item: { item_code },
+					machining_project_works
+				} = project;
+				let remaining_time = early_tool_life;
+				tool_histories = tool_histories.concat({
+					Time: created_at,
+					'Tool Material': tool_material,
+					'Tool ID': product_code,
+					'Tool Number': item_code,
+					'Workpiece Material': workpiece_material,
+					'Product ID': null,
+					'Initial Diameter (mm)': null,
+					'Final Diameter (mm)': null,
+					'Workpart Length (mm)': null,
+					'Machining Process': machining_process,
+					'Cutting Speed (m/min)': cutting_speed,
+					'Depth of Cut (mm)': depth_of_cut,
+					'Feeding (mm/rev)': feeding,
+					'Machining Time (min)': null,
+					'Product Quantity (pcs)': null,
+					'Early Tool Life (min)': early_tool_life,
+					'Remaining Tool Life (min)': remaining_time
+				});
+				tool_histories = tool_histories.concat(
+					...machining_project_works.map(
+						({
+							updated_at,
+							product_id,
+							initial_diameter,
+							final_diameter,
+							workpart_length,
+							machining_time,
+							product_quantity
+						}) => {
+							remaining_time -= machining_time * product_quantity;
+							return {
+								Time: updated_at,
+								'Tool Material': tool_material,
+								'Tool ID': product_code,
+								'Tool Number': item_code,
+								'Workpiece Material': workpiece_material,
+								'Product ID': product_id,
+								'Initial Diameter (mm)': initial_diameter,
+								'Final Diameter (mm)': final_diameter,
+								'Workpart Length (mm)': workpart_length,
+								'Machining Process': machining_process,
+								'Cutting Speed (m/min)': cutting_speed,
+								'Depth of Cut (mm)': depth_of_cut,
+								'Feeding (mm/rev)': feeding,
+								'Machining Time (min)': machining_time,
+								'Product Quantity (pcs)': product_quantity,
+								'Early Tool Life (min)': early_tool_life,
+								'Remaining Tool Life (min)': remaining_time
+							};
+						}
+					)
+				);
+			});
+			const items = tool_histories;
+			// @ts-ignore
+			const replacer = (key, value) => (value === null ? '' : value); // specify how you want to handle null values here
+			const header = Object.keys(items[0]);
+			const csv = [
+				header.join(','), // header row first
+				...items.map((row) =>
+					// @ts-ignore
+					header.map((fieldName) => JSON.stringify(row[fieldName], replacer)).join(',')
+				)
+			].join('\r\n');
+
+			console.log(csv);
 			toast.push('Downloading Tool History shortly..', {
 				classes: ['success']
 			});
+			const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+			const url = URL.createObjectURL(blob);
+			const link = document.createElement('a');
+			link.setAttribute('href', url);
+			link.setAttribute('download', 'tool_history.csv');
+			link.style.visibility = 'hidden';
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
 			return;
 		}
 		const { message, errors: json_err } = await result.json();
