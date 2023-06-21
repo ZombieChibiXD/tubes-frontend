@@ -5,7 +5,7 @@
 	import { user, authenticated, authenticating, token } from "$lib/stores/store";
 	import Loading from "$lib/components/Loading.svelte";
 	import Navbar from "./Navbar.svelte";
-
+	import Toast from '$lib/components/Toast.svelte';
 	let loading = false;
 	/**
 	 * @param {import('$lib/types/global').NewAccessToken?} token
@@ -97,5 +97,6 @@
 		</footer>
 	</div>
 {/if}
+<Toast />
 
 
