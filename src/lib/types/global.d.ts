@@ -61,9 +61,31 @@ export interface MachiningProject {
 	depth_of_cut: number;
 	feeding: number;
 	early_tool_life: number;
+	remaining_time: number;
 	is_active: boolean;
 	created_at: string;
 	updated_at: string;
 }
+
+export interface MachiningProjectWork {
+	id: number;
+	machining_project_id: number;
+	product_id: string;
+	initial_diameter: number;
+	final_diameter: number;
+	workpart_length: number;
+	product_quantity: number;
+	machining_time: number;
+	created_at: string;
+	updated_at: string;
+}
+
+export interface MachiningProjectExtended extends MachiningProject {
+	tool_material: ToolMaterial;
+	tool_product: ToolProduct;
+	tool_item: ToolItem;
+	machining_project_works: MachiningProjectWork[];
+}
+
 
 

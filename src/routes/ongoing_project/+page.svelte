@@ -64,6 +64,7 @@
 		early_tool_life: undefined,
 		created_at: undefined,
 		updated_at: undefined,
+		remaining_time: undefined,
 		is_active: false
 	};
 
@@ -198,8 +199,9 @@
 
 	const calculate_tool_life = () => {
 		if (!form.reportValidity()) return;
-
-		remaining_tool_life = machining_project.early_tool_life - machining_time * product_quantity;
+		console.log('Calculating Tool Life');
+		console.log('Machining Project', machining_project);
+		remaining_tool_life = machining_project.remaining_time - machining_time * product_quantity;
 		if (remaining_tool_life < 0) {
 			errors = {
 				machining_time: ['Machining time is too long.'],
@@ -211,12 +213,12 @@
 	const handleSubmit = async () => {
 		const formData = {
 			machining_project_id: machining_project.id,
-			machining_time,
 			product_id,
 			initial_diameter,
 			final_diameter,
 			workpart_length,
-			product_quantity
+			machining_time,
+			product_quantity,
 		};
 
 		console.log(formData);
@@ -237,6 +239,13 @@
 					classes: ['warning']
 				});
 				projects = projects.filter(({ id }) => id != machining_project.id);
+			} else {
+				projects = projects.map((project) => {
+					if (project.id == machining_project.id) {
+						return machining_project;
+					}
+					return project;
+				});
 			}
 			form.reset();
 			return;
