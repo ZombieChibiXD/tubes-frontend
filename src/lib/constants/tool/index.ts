@@ -1,4 +1,4 @@
-import type { ToolMaterial } from "$lib/types/global";
+import type { MachiningProject, ToolMaterial } from "$lib/types/global";
 
 export const ToolMaterialWithProductWithItem : ToolMaterial[] = [
 	{
@@ -66,6 +66,39 @@ export const ToolMaterialWithProductWithItem : ToolMaterial[] = [
 		created_at: '2023-06-20T20:20:50.000000Z',
 		updated_at: '2023-06-20T20:20:50.000000Z',
 		products: []
+	}
+];
+
+export const MachiningProjects : MachiningProject[] = [
+	{
+		id: 1,
+		tool_material_id: 1,
+		tool_product_id: 1,
+		tool_item_id: 1,
+		workpiece_material: 'AISI 1018',
+		machining_process: 'Roughing',
+		cutting_speed: 165,
+		depth_of_cut: 0.25,
+		feeding: 0.25,
+		early_tool_life: 60,
+		is_active: true,
+		created_at: '2021-10-01T00:00:00.000000Z',
+		updated_at: '2021-10-01T00:00:00.000000Z'
+	},
+	{
+		id: 2,
+		tool_material_id: 1,
+		tool_product_id: 2,
+		tool_item_id: 2,
+		workpiece_material: 'AISI 1020',
+		machining_process: 'Roughing',
+		cutting_speed: 165,
+		depth_of_cut: 0.25,
+		feeding: 0.25,
+		early_tool_life: 60,
+		is_active: false,
+		created_at: '2021-10-01T00:00:00.000000Z',
+		updated_at: '2021-10-01T00:00:00.000000Z'
 	}
 ];
 

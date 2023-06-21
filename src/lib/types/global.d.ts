@@ -50,4 +50,20 @@ export interface ToolItem {
     updated_at: string;
 }
 
+export interface MachiningProject {
+	id: number;
+	tool_material_id: number;
+	tool_product_id: number;
+	tool_item_id: number;
+	workpiece_material: string;
+	machining_process: string;
+	cutting_speed: number;
+	depth_of_cut: number;
+	feeding: number;
+	early_tool_life: number;
+	is_active: boolean;
+	created_at: string;
+	updated_at: string;
+}
+
 
