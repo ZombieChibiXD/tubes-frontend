@@ -7,11 +7,10 @@
 <script>
 	import { goto } from "$app/navigation";
 	import { fetch_api } from "$lib/components/fetch";
-	import { user, authenticated, authenticating, token } from "$lib/stores/store";
-	import { get } from "svelte/store";
-
-	if (get(authenticated)) {
-		goto("/");
+	import { user, authenticated, authenticating, token } from "$lib/stores/store";	$: {
+		if (!$authenticating && $authenticated) {
+			goto("/");
+		}
 	}
 	console.log($authenticated);
 
@@ -30,7 +29,7 @@
 		console.log(data)
 		authenticating.set(true)
 		try {
-			const result = await fetch_api('http://localhost:8000/api/auth/login', {
+			const result = await fetch_api('api/auth/login', {
 				method: 'POST',
 				body: JSON.stringify(data)
 			})
@@ -42,7 +41,8 @@
 				token.set(jwt_token)
 				localStorage.setItem('token',JSON.stringify(jwt_token))
 				localStorage.setItem('user', JSON.stringify(user_data))
-				goto('/')
+				const urlParams = new URLSearchParams(window.location.search);
+				goto(urlParams.get('redirect') || '/')
 				return
 			}
 			const {message, errors: json_err} = await result.json();

@@ -15,7 +15,7 @@
 		if (!get(authenticated)) {
 			goto("/login");
 		}
-		const result = await fetch_api('http://localhost:8000/api/auth/logout', {
+		const result = await fetch_api('api/auth/logout', {
 			method: 'POST'
 		})
 		if (result.status == 200) {
