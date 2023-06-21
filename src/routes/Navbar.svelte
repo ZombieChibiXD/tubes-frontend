@@ -14,7 +14,7 @@
             <li><a href="/ongoing_project">Ongoing Project</a></li>
             <li><a href="/ongoing_project">Tool History</a></li>
     
-            {#if $token?.accessToken.abilities.includes('ADMINISTRATOR')}
+            <!-- {#if $token?.accessToken.abilities.includes('ADMINISTRATOR')}
             <li>
                 <details role="list" dir="rtl">
                 <summary aria-haspopup="listbox" role="link">Admin</summary>
@@ -24,7 +24,7 @@
                 </ul>
                 </details>
             </li>
-            {/if}
+            {/if} -->
             <li><a href="/logout">Logout</a></li>
         {:else}
             <li><a href="/login">Login</a></li>
