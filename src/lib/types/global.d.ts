@@ -11,7 +11,16 @@ export interface NewAccessToken {
 	};
 	plainTextToken: string;
 }
-
+export interface User {
+	id: number;
+	name: string;
+	email: string;
+	username: string;
+	email_verified_at: string?;
+	created_at: string;
+	updated_at: string;
+	role_names: string[];
+}
 export interface ToolMaterial {
 	id: number;
 	name: string;
