@@ -14,17 +14,18 @@
             <li><a href="/ongoing_project">Ongoing Project</a></li>
             <li><a href="/tool_history">Tool History</a></li>
     
-            <!-- {#if $token?.accessToken.abilities.includes('ADMINISTRATOR')}
+            {#if $token?.accessToken.abilities.includes('ADMINISTRATOR')}
             <li>
                 <details role="list" dir="rtl">
                 <summary aria-haspopup="listbox" role="link">Admin</summary>
                 <ul role="listbox" data-theme="dark">
-                    <li><a href="#a">Users</a></li>
-                    <li><a href="#a">Tools</a></li>
+                    <li><a href="/admin/users">Users</a></li>
+                    <li><a href="/admin/materials">Tool Materials</a></li>
+                    <li><a href="/admin/products">Tool Products</a></li>
                 </ul>
                 </details>
             </li>
-            {/if} -->
+            {/if}
             <li><a href="/logout">Logout</a></li>
         {:else}
             <li><a href="/login">Login</a></li>

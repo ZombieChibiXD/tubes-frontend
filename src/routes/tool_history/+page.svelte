@@ -185,25 +185,6 @@
 					machining_project_works
 				} = project;
 				let remaining_time = early_tool_life;
-				tool_histories = tool_histories.concat({
-					Time: created_at,
-					'Tool Material': tool_material,
-					'Tool ID': product_code,
-					'Tool Number': item_code,
-					'Workpiece Material': workpiece_material,
-					'Product ID': null,
-					'Initial Diameter (mm)': null,
-					'Final Diameter (mm)': null,
-					'Workpart Length (mm)': null,
-					'Machining Process': machining_process,
-					'Cutting Speed (m/min)': cutting_speed,
-					'Depth of Cut (mm)': depth_of_cut,
-					'Feeding (mm/rev)': feeding,
-					'Machining Time (min)': null,
-					'Product Quantity (pcs)': null,
-					'Early Tool Life (min)': early_tool_life,
-					'Remaining Tool Life (min)': remaining_time
-				});
 				tool_histories = tool_histories.concat(
 					...machining_project_works.map(
 						({
@@ -255,7 +236,7 @@
 			toast.push('Downloading Tool History shortly..', {
 				classes: ['success']
 			});
-			const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+			const blob = new Blob(['sep=,'+csv], { type: 'text/csv;charset=utf-8;' });
 			const url = URL.createObjectURL(blob);
 			const link = document.createElement('a');
 			link.setAttribute('href', url);

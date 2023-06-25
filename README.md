@@ -2,12 +2,12 @@
 npm install -g yarn
 
 # Set up Environment
-cp .env.example .env.local
+copy .env.example .env.local
 
 Modify .env.local to match your environment
 
 # Install dependencies
-yarn install
+yarn
 
 # Run the app
 yarn dev
