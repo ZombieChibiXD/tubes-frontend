@@ -94,7 +94,6 @@
 			data.materials[model.id] = model;
 			dialog.close();
 			form.reset();
-			load();
 			return;
 		}
 		const { message, errors: json_err } = await result.json();
