@@ -200,6 +200,10 @@
 							<td>{toolboxes_count}</td>
 							<td class="flex">
 								<a
+									href="/admin/products/{id}"
+									role="button">Show</a
+								>
+								<a
 									href="#edit"
 									class="contrast"
 									on:click={() => {
