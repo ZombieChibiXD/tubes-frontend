@@ -11,13 +11,18 @@
 	 * @type {{ [key: string]: string[] }}
 	 */
 	let errors = {};
-
 	/**
-	 * @type {{[key:number]:import('$lib/types/global').ToolMaterial & {
-	 *   products_count: number
-	 * }}}
+	 * @type {{
+	 *   materials: {
+	 *     [key: number]: import('$lib/types/global').ToolMaterial & {
+	 *       products_count: number
+	 *     }
+	 *   }
+	 * }}
 	 */
-	let data = [];
+	let data = {
+		materials: {}
+	};
 
 	const interval = setInterval(() => {
 		if ($authenticated) {
@@ -67,11 +72,13 @@
 
 	async function handleSubmit() {
 		errors = {};
-		if (formData.id) {
-			if (!formData.description || formData.description == '') {
-				formData.description = null;
-			}
-		}
+		
+		const nullable = ['description'];
+		nullable.forEach((key) => {
+			// @ts-ignore
+			if (!formData[key] || formData[key] == '') formData[key] = undefined;
+		});
+
 		const url = formData.id
 			? 'api/tool/materials/' + formData.id
 			: 'api/tool/materials';
@@ -84,7 +91,7 @@
 		});
 		if (result.status == 201 || result.status == 200) {
 			const model = await result.json();
-			data[model.id] = model;
+			data.materials[model.id] = model;
 			dialog.close();
 			form.reset();
 			load();
@@ -110,10 +117,10 @@
 		});
 		if (result.status == 200) {
 			// @ts-ignore
-			data = Object.keys(data).reduce((acc, /** @type {number} */ key) => {
+			data.materials = Object.keys(data.materials).reduce((acc, /** @type {number} */ key) => {
 				if (key != id) {
 					// @ts-ignore
-					acc[key] = data[key];
+					acc[key] = data.materials[key];
 				}
 				return acc;
 			}, {});
@@ -164,7 +171,7 @@
 			</thead>
 			<tbody>
 				{#if !loading}
-					{#each Object.values(data) as { id, name, description, products_count, updated_at }}
+					{#each Object.values(data.materials) as { id, name, description, products_count, updated_at }}
 						<tr>
 							<td>{name}</td>
 							<td>{description ?? 'N/A'}</td>
@@ -176,7 +183,7 @@
 									class="contrast"
 									on:click={() => {
 										// @ts-ignore
-										formData = { ...formData, ...data[id] };
+										formData = { ...formData, ...data.materials[id] };
 										dialog.showModal();
 									}}
 									role="button">Edit</a
