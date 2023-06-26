@@ -4,7 +4,7 @@ import { authenticated, token } from "$lib/stores/store";
 import { onMount } from "svelte";
 import { get } from "svelte/store";
 
-export async function fetch_api(url: string, options: RequestInit | undefined, redirect = true) {
+export async function fetch_api(url: string, options: RequestInit | undefined = undefined, redirect = true) {
     const tokenObj = get(token);
     const isAuthenticated = get(authenticated);
     const auth = {
