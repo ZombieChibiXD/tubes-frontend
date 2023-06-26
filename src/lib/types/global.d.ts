@@ -23,6 +23,11 @@ export type User = {
 	role_names: string[];
 } & Timestamp;
 
+export type Role = {
+	id: number;
+	name: string;
+} & Timestamp;
+
 export type ToolMaterial = {
 	id: number;
 	name: string;
