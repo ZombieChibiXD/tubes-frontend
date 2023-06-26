@@ -6,10 +6,10 @@ export const toasts = {
 			classes: ['success']
 		});
 	},
-	error: (message: string) => {
+	danger: (message: string) => {
         console.error(message);
 		toast.push(message, {
-			classes: ['error']
+			classes: ['danger']
 		});
 	},
 	info: (message: string) => {
