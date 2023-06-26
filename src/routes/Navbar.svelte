@@ -4,15 +4,15 @@
 <nav class="container-fluid">
     <ul>
         <a href="/" class="contrast">
-            <strong>Tubes Frontend</strong>
+            <strong>Estimated Tool Life</strong>
         </a>
     </ul>
     <ul>
         <li><a href="/">Home</a></li>
         {#if $authenticated}
-            <li><a href="/new_project">New Project</a></li>
-            <li><a href="/ongoing_project">Ongoing Project</a></li>
-            <li><a href="/tool_history">Tool History</a></li>
+            <li><a href="/project/new">New Project</a></li>
+            <li><a href="/project/continue">Continue Project</a></li>
+            <li><a href="/project/history">Tool History</a></li>
     
             {#if $token?.accessToken.abilities.includes('ADMINISTRATOR')}
             <li>

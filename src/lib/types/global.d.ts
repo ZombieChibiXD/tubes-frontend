@@ -1,68 +1,64 @@
-export interface NewAccessToken {
+export type Timestamp = {
+	created_at: string;
+	updated_at: string;
+};
+export type NewAccessToken = {
 	accessToken: {
 		name: string;
 		abilities: string[];
 		expires_at: string;
 		tokenable_id: number;
 		tokenable_type: string;
-		updated_at: string;
-		created_at: string;
 		id: number;
-	};
+	} & Timestamp;
 	plainTextToken: string;
-}
-export interface User {
+};
+
+export type User = {
 	id: number;
 	name: string;
 	email: string;
 	username: string;
 	email_verified_at: string?;
-	created_at: string;
-	updated_at: string;
 	role_names: string[];
-}
-export interface ToolMaterial {
+} & Timestamp;
+
+export type ToolMaterial = {
 	id: number;
 	name: string;
-    description: string?;
-    created_at: string;
-    updated_at: string;
-    pivot?: ToolProductMaterial;
-    products?: ToolProduct[];
-}
-
-export interface ToolProduct {
+	description: string?;
+} & Timestamp;
+export type ToolProduct = {
 	id: number;
+	tool_material_id: number;
 	code: string;
+	prefix: string;
 	name: string | null;
 	min_cutting_speed: number;
 	max_cutting_speed: number;
-	created_at: string;
-	updated_at: string;
-    items?: ToolItem[];
-	pivot?:  ToolProductMaterial;
-}
+} & Timestamp;
 
-export interface ToolProductMaterial {
-    id: number;
-    tool_product_id: number;
-    tool_material_id: number;
-    created_at: string;
-    updated_at: string;
-}
-
-export interface ToolItem {
-    id: number;
-    tool_product_id: number;
-    item_code: number;
-    created_at: string;
-    updated_at: string;
-}
-
-export interface MachiningProject {
+export type ToolProductToolbox = {
 	id: number;
-	tool_material_id: number;
 	tool_product_id: number;
+	code: number;
+} & Timestamp;
+
+export type ToolColorCode = {
+	id: number;
+	code: string;
+	color: string;
+	text_color: string;
+} & Timestamp;
+
+export type ToolItem = {
+	id: number;
+	tool_product_toolbox_id: number;
+	tool_color_code_id: number;
+} & Timestamp;
+
+export type MachiningProject = {
+	id: number;
 	tool_item_id: number;
 	workpiece_material: string;
 	machining_process: string;
@@ -70,13 +66,19 @@ export interface MachiningProject {
 	depth_of_cut: number;
 	feeding: number;
 	early_tool_life: number;
-	remaining_time: number;
+	remaining_tool_life: number;
+	total_machining_time: number;
 	is_active: boolean;
-	created_at: string;
-	updated_at: string;
+} & Timestamp;
+
+export type MachiningData = {
+	workpiece_materials: string[];
+	machining_processes: string[];
+	c: number;
+	n: number;
 }
 
-export interface MachiningProjectWork {
+export type MachiningProjectWork = {
 	id: number;
 	machining_project_id: number;
 	product_id: string;
@@ -85,16 +87,35 @@ export interface MachiningProjectWork {
 	workpart_length: number;
 	product_quantity: number;
 	machining_time: number;
-	created_at: string;
-	updated_at: string;
-}
+	total_machining_time: number;
+} & Timestamp;
 
-export interface MachiningProjectExtended extends MachiningProject {
-	tool_material: ToolMaterial;
-	tool_product: ToolProduct;
+export type ToolMaterialAdvanced = {
+	products: ToolProduct[];
+	products_count: number;
+} & ToolMaterial;
+
+export type ToolProductAdvanced = ToolProduct & {
+	toolboxes: ToolProductToolbox[];
+	toolbox_count: number;
+};
+
+export type MachiningProjectExtended = MachiningProject & {
 	tool_item: ToolItem;
 	machining_project_works: MachiningProjectWork[];
+};
+
+export type ProjectData = {
+	materials: (ToolMaterial & (ToolMaterialAdvanced & {
+		products: (ToolProductAdvanced & {
+			toolboxes: (ToolProductToolbox & {
+				tool_items: ToolItem[];
+			})[];
+		})[];
+	}))[];
+	projects: MachiningProject[];
+	machining: MachiningData;
+	colors: {
+		[key: number | string]: ToolColorCode;
+	}
 }
-
-
-
