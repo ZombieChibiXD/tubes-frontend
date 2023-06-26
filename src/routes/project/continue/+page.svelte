@@ -146,7 +146,7 @@
 	const calculate_tool_life = () => {
 		if (!form.reportValidity()) return;
 		if (!machining_project) {
-			toasts.error('Please select a tool item. Machining project is not found.');
+			toasts.danger('Please select a tool item. Machining project is not found.');
 			return;
 		}
 		console.log('Calculating Tool Life');
@@ -162,7 +162,7 @@
 	};
 	const handleSubmit = async () => {
 		if (!machining_project) {
-			toasts.error('Please select a tool item. Machining project is not found.');
+			toasts.danger('Please select a tool item. Machining project is not found.');
 			return;
 		}
 		errors = {};
@@ -199,7 +199,7 @@
 		}
 		const { message, errors: json_err } = await result.json();
 
-		toasts.error(message);
+		toasts.danger(message);
 		const error_400 = {
 			tool_material_id: [message],
 			tool_product_id: [message],

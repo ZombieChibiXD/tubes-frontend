@@ -100,7 +100,7 @@
 		}
 		const { message, errors: json_err } = await result.json();
 
-		toasts.error(message);
+		toasts.danger(message);
 		const error_400 = {
 			tool_material_id: [message],
 			tool_product_id: [message],
