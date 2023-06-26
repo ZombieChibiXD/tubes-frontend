@@ -79,8 +79,7 @@
 
 <section class="container">
 	<article class="grid">
-		<div style="background-color: navy; border-radius: .4rem;">
-		</div>
+		<div style="background-image: url('https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=1169&q=80'); background-size: cover; background-position: center; border-radius: .4rem;"></div>
 		<form on:submit|preventDefault={handleSubmit} style="padding: 1rem 2rem;">
 			<div>
 				<label for="username">Username</label>
