@@ -68,7 +68,7 @@
 			delete errors[field];
 		}
 	}
-
+	const image_url = 'https://img.freepik.com/free-vector/all-data-concept-illustration_114360-4188.jpg?w=740'
 
 	// On Username Change, remove error
 	$:  resetError(username, 'username')
@@ -79,7 +79,7 @@
 
 <section class="container">
 	<article class="grid">
-		<div style="background-image: url('https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=1169&q=80'); background-size: cover; background-position: center; border-radius: .4rem;"></div>
+		<div style="background-image: url('{image_url}'); background-size: cover; background-position: center; border-radius: .4rem;"></div>
 		<form on:submit|preventDefault={handleSubmit} style="padding: 1rem 2rem;">
 			<div>
 				<label for="username">Username</label>
