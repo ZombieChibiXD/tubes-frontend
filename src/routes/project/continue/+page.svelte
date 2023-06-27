@@ -103,7 +103,7 @@
 		if (!$authenticating && $authenticated) {
 			load();
 		} else if (!$authenticating && !$authenticated) {
-			goto('/login?redirect=/ongoing_project');
+			goto('/login?redirect=/project/continue');
 		}
 	}
 

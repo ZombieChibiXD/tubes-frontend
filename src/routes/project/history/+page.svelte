@@ -42,7 +42,7 @@
 		if (!$authenticating && $authenticated) {
 			load();
 		} else if (!$authenticating && !$authenticated) {
-			goto('/login?redirect=/new_project');
+			goto('/login?redirect=/project/history');
 		}
 	}
 
