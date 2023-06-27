@@ -254,7 +254,7 @@
 				autocomplete="off"
 			>
 				<h2>{!formData.id ? 'Create' : 'Edit'} Product</h2>
-				<FormComponent {errors} name="tool_material_id" let:field>
+				<FormComponent {errors} name="tool_material_id" label="Tool Material" let:field>
 					<select id={field} bind:value={formData.tool_material_id}>
 						<option value="">Select a material</option>
 						{#each Object.values(data.materials) as { id, name }}
@@ -262,19 +262,19 @@
 						{/each}
 					</select>
 				</FormComponent>
-				<FormComponent {errors} name="code" let:field>
+				<FormComponent {errors} name="code" label="Tool Code" let:field>
 					<input type="text" id={field} bind:value={formData.code} />
 				</FormComponent>
-				<FormComponent {errors} name="prefix" let:field>
+				<FormComponent {errors} name="prefix" label="Toolbox Prefix" let:field>
 					<input type="text" id={field} bind:value={formData.prefix} />
 				</FormComponent>
 				<FormComponent {errors} name="name" label="Name" let:field>
 					<input type="text" id={field} bind:value={formData.name} />
 				</FormComponent>
-				<FormComponent {errors} name="min_cutting_speed" let:field>
+				<FormComponent {errors} name="min_cutting_speed" label="Min Cutting Speed" let:field>
 					<input type="number" id={field} bind:value={formData.min_cutting_speed} />
 				</FormComponent>
-				<FormComponent {errors} name="max_cutting_speed" let:field>
+				<FormComponent {errors} name="max_cutting_speed" label="Max Cutting Speed" let:field>
 					<input
 						type="number"
 						min={formData.min_cutting_speed}
