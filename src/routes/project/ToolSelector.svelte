@@ -133,15 +133,15 @@
 						Select Tool Material
 					{/if}
 				</option>
-				{#each materials as { id, name, products }}
-					<option value={id}>{name} ({products?.length})</option>
+				{#each materials as { id, name }}
+					<option value={id}>{name}</option>
 				{/each}
 			</select>
 			<FormError {errors} field="tool_material_id" />
 		</div>
 	</section>
 	<section class="grid">
-		<label for="tool_product_id">Toolbox ID</label>
+		<label for="tool_product_id">Tool Code</label>
 		<div>
 			<select
 				id="tool_product_id"
@@ -153,20 +153,20 @@
 					{#if !tool_material_id}
 						Select Tool Material First
 					{:else if products.length == 0}
-						No Available Toolbox Found
+						No Available Tool Found
 					{:else}
-						Select Toolbox
+						Select Tool
 					{/if}
 				</option>
-				{#each products as { id, code, name, toolboxes }}
-					<option value={id}>{code}{name ? ' - ' + name : ''} ({toolboxes?.length})</option>
+				{#each products as { id, code, name }}
+					<option value={id}>{code}{name ? ' - ' + name : ''}</option>
 				{/each}
 			</select>
 			<FormError {errors} field="tool_product_id" />
 		</div>
 	</section>
 	<section class="grid">
-		<label for="tool_product_toolbox_id">Tool ID</label>
+		<label for="tool_product_toolbox_id">Toolbox ID</label>
 		<div>
 			<select
 				id="tool_product_toolbox_id"
@@ -176,15 +176,15 @@
 			>
 				<option value="">
 					{#if !tool_product_id}
-						Select Toolbox First
+						Select Tool Code First
 					{:else if toolboxes.length == 0}
-						No Available Tool Found
+						No Available Toolbox Found
 					{:else}
-						Select Tool
+						Select Toolbox
 					{/if}
 				</option>
-				{#each toolboxes as { id, code, tool_items }}
-					<option value={id}>{tool_product?.prefix}-{code} ({tool_items.length})</option>
+				{#each toolboxes as { id, code }}
+					<option value={id}>{tool_product?.prefix}-{code}</option>
 				{/each}
 			</select>
 			<FormError {errors} field="tool_product_toolbox_id" />
@@ -192,7 +192,7 @@
 	</section>
 	<section class="grid">
 		<label for="tool_item_id">
-			Color ID
+			Tool ID
 			{#if tool_item}
 				{@const { color } = colors[tool_item.tool_color_code_id]}
 				<span class="color-preview" style={`background-color: ${color};`}></span>
@@ -202,11 +202,11 @@
 			<select id="tool_item_id" bind:value={tool_item_id} on:change={on_item_change} required>
 				<option value="" style="background-color: white; color: black;">
 					{#if !tool_product_toolbox_id}
-						Select Tool First
+						Select Toolbox First
 					{:else if items.length == 0}
-						No Available Color Found
+						No Available ToolID/Color Found
 					{:else}
-						Select Color
+						Select ToolID/Color
 					{/if}
 				</option>
 				{#each items as { id: item_id, tool_color_code_id: color_id }}
