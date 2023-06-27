@@ -2,9 +2,9 @@
  * @typedef {{
  *   	Time: any;
  *   	['Tool Material']: any;
+ *   	['Tool Code']: any;
  *   	['Toolbox ID']: any;
  *   	['Tool ID']: any;
- *   	['Color ID']: any;
  *   	['Workpiece Material']: any;
  *   	['Product ID']: any;
  *   	['Initial Diameter (mm)']: any;
@@ -87,9 +87,9 @@ export function convert_to_flat_json(params) {
 						return {
 							Time: updated_at,
 							'Tool Material': tool_material,
-							'Toolbox ID': product_code,
-							'Tool ID': `${prefix}-${toolbox_code}`,
-							'Color ID': `${color_code}${tool_color_code_id}`,
+							'Tool Code': product_code,
+							'Toolbox ID': `${prefix}-${toolbox_code}`,
+							'Tool ID': `${color_code}${tool_color_code_id}`,
 							'Workpiece Material': workpiece_material,
 							'Product ID': product_id,
 							'Initial Diameter (mm)': initial_diameter,
@@ -109,6 +109,30 @@ export function convert_to_flat_json(params) {
 			);
 		}
 	);
+	if (tool_histories.length === 0) {
+		return [
+			{
+				Time: '',
+				'Tool Material': '',
+				'Tool Code': '',
+				'Toolbox ID': '',
+				'Tool ID': '',
+				'Workpiece Material': '',
+				'Product ID': '',
+				'Initial Diameter (mm)': '',
+				'Final Diameter (mm)': '',
+				'Workpart Length (mm)': '',
+				'Machining Process': '',
+				'Cutting Speed (m/min)': '',
+				'Depth of Cut (mm)': '',
+				'Feeding (mm/rev)': '',
+				'Machining Time (min)': '',
+				'Product Quantity (pcs)': '',
+				'Current Tool Life (min)': '',
+				'Remaining Tool Life (min)': ''
+			}
+		]
+	}
 
 	return tool_histories;
 }
