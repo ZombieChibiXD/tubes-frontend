@@ -7,10 +7,6 @@
 </svelte:head>
 
 <section class="container">
-	<h1>
-		Welcome to Tubesoft
-	</h1>
-
 	<article>
 		<header>
 			<h2>What is this Program About?</h2>

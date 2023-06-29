@@ -92,7 +92,7 @@
 		</main>
 		<footer>
 			<p>
-				&copy; 2021 Tubesoft
+				&copy; 2021
 			</p>
 		</footer>
 	</div>
