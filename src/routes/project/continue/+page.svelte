@@ -210,13 +210,13 @@
 </script>
 
 <svelte:head>
-	<title>Ongoing Project</title>
-	<meta name="description" content="Ongoing Project" />
+	<title>Continue Project</title>
+	<meta name="description" content="Continue Project" />
 </svelte:head>
 
 <section class="container">
 	<form on:submit|preventDefault={handleSubmit} id="form" bind:this={form}>
-		<h1>Ongoing Project</h1>
+		<h1>Continue Project</h1>
 		<ToolSelector {materials} {errors} {colors} bind:tool_item bind:tool_product />
 		<fieldset>
 			<legend> Product Specifications </legend>
