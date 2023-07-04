@@ -24,7 +24,7 @@
 			</p>
 			<h3>As Administrator</h3>
 			<p>
-				As an admin, you can create new Users.
+				As an admin, you can create or modify user of this website.
 				<!-- , and manage the tools and projects -->
 			</p>
 		</main>
