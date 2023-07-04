@@ -15,16 +15,16 @@
             <li><a href="/project/history">Tool History</a></li>
     
             {#if $token?.accessToken.abilities.includes('ADMINISTRATOR')}
-            <li>
+            <li><a href="/admin/users">Users</a></li>
+            <!-- <li>
                 <details role="list" dir="rtl">
                 <summary aria-haspopup="listbox" role="link">Admin</summary>
                 <ul role="listbox" data-theme="dark">
-                    <li><a href="/admin/users">Users</a></li>
                     <li><a href="/admin/materials">Tool Materials</a></li>
                     <li><a href="/admin/products">Tool Products</a></li>
                 </ul>
                 </details>
-            </li>
+            </li> -->
             {/if}
             <li><a href="/logout">Logout</a></li>
         {:else}
