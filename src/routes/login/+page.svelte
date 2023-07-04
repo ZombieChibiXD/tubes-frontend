@@ -5,9 +5,11 @@
 
 
 <script>
-	import { goto } from "$app/navigation";
-	import { fetch_api } from "$lib/components/fetch";
-	import { user, authenticated, authenticating, token } from "$lib/stores/store";	$: {
+	import { goto } from "$app/navigation"
+	import { fetch_api } from "$lib/components/fetch"
+	import { user, authenticated, authenticating, token } from "$lib/stores/store"
+	
+	$: {
 		if (!$authenticating && $authenticated) {
 			goto("/");
 		}
